@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Login — APANA SELECTION</title>
+<link rel="icon" id="faviconLink" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23121214%22/><text x=%2250%25%22 y=%2262%25%22 font-size=%2255%22 fill=%22%23D6A419%22 text-anchor=%22middle%22 font-family=%22sans-serif%22>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="login">
+
+<div class="login-page">
+  <a href="index.html" class="login-page-brand" id="brandLink">
+    <span id="brandName">APANA SELECTION</span>
+  </a>
+
+  <div class="login-page-card">
+    <h1>Owner Login</h1>
+    <p class="login-sub">Sign in to manage your website from any device.</p>
+
+    <form id="loginForm">
+      <label>Username
+        <input type="text" id="loginUsername" autocomplete="username" required>
+      </label>
+      <label>Password
+        <input type="password" id="loginPassword" autocomplete="current-password" required>
+      </label>
+      <p class="login-error" id="loginError" hidden>Incorrect username or password.</p>
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <a href="index.html" class="login-page-back">← Back to website</a>
+  </div>
+
+  <p class="login-page-note">Frontend-only mode: your login and any changes you make are stored in this browser only.</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

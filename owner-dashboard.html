@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Dashboard — APANA SELECTION</title>
+<link rel="icon" id="faviconLink" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23121214%22/><text x=%2250%25%22 y=%2262%25%22 font-size=%2255%22 fill=%22%23D6A419%22 text-anchor=%22middle%22 font-family=%22sans-serif%22>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dashboard">
+
+<div class="dashboard" id="ownerDashboard">
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-brand">
+      <span>APANA</span> Dashboard
+    </div>
+    <nav class="dash-nav" id="dashNav">
+      <button class="dash-link active" data-panel="overview">Dashboard</button>
+      <button class="dash-link" data-panel="visitors">Visitors</button>
+      <button class="dash-link" data-panel="products">Products</button>
+      <button class="dash-link" data-panel="addproduct">Add Product</button>
+      <button class="dash-link" data-panel="homepage">Homepage</button>
+      <button class="dash-link" data-panel="offers">Offers</button>
+      <button class="dash-link" data-panel="about">About</button>
+      <button class="dash-link" data-panel="shopinfo">Shop Information</button>
+      <button class="dash-link" data-panel="contact">Contact</button>
+      <button class="dash-link" data-panel="categories">Categories</button>
+      <button class="dash-link" data-panel="social">Social Links</button>
+      <button class="dash-link" data-panel="settings">Website Settings</button>
+    </nav>
+    <div class="dash-note">Frontend-only mode: changes are stored in this browser.</div>
+    <a href="index.html" class="btn btn-outline btn-block" id="viewSiteBtn">View Website</a>
+    <button class="btn btn-danger btn-block" id="logoutBtn">Logout</button>
+  </aside>
+
+  <button class="dash-menu-toggle" id="dashMenuToggle" aria-label="Open dashboard menu">☰ Menu</button>
+
+  <section class="dash-main">
+
+    <div class="dash-panel active" id="panel-overview">
+      <h1>Dashboard</h1>
+      <div class="dash-stats-grid" id="dashStatsGrid"></div>
+    </div>
+
+    <div class="dash-panel" id="panel-visitors">
+      <h1>Visitors</h1>
+      <div class="dash-stats-grid" id="visitorStatsGrid"></div>
+      <h2 class="visitor-chart-title">Last 14 Days</h2>
+      <div class="visitor-chart" id="visitorChart"></div>
+      <p class="form-hint">Daily numbers only start counting from when this feature was added — "All Time" still reflects every visit since launch, it just can't be split up by day for dates before this update.</p>
+    </div>
+
+    <div class="dash-panel" id="panel-products">
+      <h1>Products</h1>
+      <div class="dash-product-list" id="dashProductList"></div>
+    </div>
+
+    <div class="dash-panel" id="panel-addproduct">
+      <h1 id="productFormHeading">Add Product</h1>
+      <form id="productForm" class="dash-form">
+        <input type="hidden" id="pfId">
+        <label>Product Name
+          <input type="text" id="pfName" required>
+        </label>
+        <div class="form-row">
+          <label>Price (₹)
+            <input type="number" id="pfPrice" required min="0">
+          </label>
+          <label>Old Price (₹)
+            <input type="number" id="pfOldPrice" min="0">
+          </label>
+        </div>
+        <label>Category
+          <select id="pfCategory"></select>
+        </label>
+        <label>Description
+          <textarea id="pfDescription" rows="3"></textarea>
+        </label>
+        <label>Sizes (comma separated, e.g. S, M, L, XL)
+          <input type="text" id="pfSizes" placeholder="S, M, L, XL">
+        </label>
+        <label>Colors (comma separated)
+          <input type="text" id="pfColors" placeholder="Black, White, Grey">
+        </label>
+        <label>Badge (e.g. New, Sale, Trending — optional)
+          <input type="text" id="pfBadge">
+        </label>
+        <label>Main Image
+          <input type="file" id="pfMainImage" accept="image/*">
+        </label>
+        <div class="image-preview-row" id="pfMainImagePreview"></div>
+        <label>Additional / 360° Images (select multiple, in order around the product)
+          <input type="file" id="pfExtraImages" accept="image/*" multiple>
+        </label>
+        <div class="image-preview-row" id="pfExtraImagesPreview"></div>
+        <div class="checkbox-grid">
+          <label class="checkbox-label"><input type="checkbox" id="pfAvailable" checked> Available</label>
+          <label class="checkbox-label"><input type="checkbox" id="pfNewArrival"> New Arrival</label>
+          <label class="checkbox-label"><input type="checkbox" id="pfTrending"> Trending</label>
+          <label class="checkbox-label"><input type="checkbox" id="pfFeatured"> Featured</label>
+          <label class="checkbox-label"><input type="checkbox" id="pf360" checked> Enable 360° Viewer</label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Product</button>
+          <button type="button" class="btn btn-outline" id="pfCancelEdit" hidden>Cancel Edit</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-homepage">
+      <h1>Homepage Settings</h1>
+      <form class="dash-form" id="homepageForm">
+        <label>Website Name
+          <input type="text" id="hfSiteName">
+        </label>
+        <label>Hero Heading
+          <input type="text" id="hfHeroHeading">
+        </label>
+        <label>Hero Subtitle (kicker)
+          <input type="text" id="hfHeroKicker">
+        </label>
+        <label>Hero Description
+          <textarea id="hfHeroDesc" rows="2"></textarea>
+        </label>
+        <label>Hero Image
+          <input type="file" id="hfHeroImage" accept="image/*">
+        </label>
+        <div class="image-preview-row" id="hfHeroImagePreview"></div>
+        <label>Primary Button Text
+          <input type="text" id="hfBtnPrimary">
+        </label>
+        <label>Shop Section Heading
+          <input type="text" id="hfShopHeading">
+        </label>
+        <label>Shop Section Description
+          <input type="text" id="hfShopDesc">
+        </label>
+        <div class="checkbox-grid">
+          <label class="checkbox-label"><input type="checkbox" id="hfShowOffer" checked> Show Offer Section</label>
+          <label class="checkbox-label"><input type="checkbox" id="hfShowAbout" checked> Show About Section</label>
+          <label class="checkbox-label"><input type="checkbox" id="hfShowShopInfo" checked> Show Shop Info Section</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Homepage</button>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-offers">
+      <h1>Offer</h1>
+      <form class="dash-form" id="offerForm">
+        <label class="checkbox-label"><input type="checkbox" id="ofEnabled" checked> Enable Offer</label>
+        <label>Offer Tag
+          <input type="text" id="ofTag">
+        </label>
+        <label>Offer Title
+          <input type="text" id="ofTitle">
+        </label>
+        <label>Discount Text
+          <input type="text" id="ofDiscount">
+        </label>
+        <label>Description
+          <textarea id="ofDesc" rows="2"></textarea>
+        </label>
+        <label>Offer Image
+          <input type="file" id="ofImage" accept="image/*">
+        </label>
+        <div class="image-preview-row" id="ofImagePreview"></div>
+        <label>Button Text
+          <input type="text" id="ofBtnText">
+        </label>
+        <button type="submit" class="btn btn-primary">Save Offer</button>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-about">
+      <h1>About</h1>
+      <form class="dash-form" id="aboutForm">
+        <label>About Heading
+          <input type="text" id="afHeading">
+        </label>
+        <label>About Description
+          <textarea id="afDesc" rows="2"></textarea>
+        </label>
+        <label>Shop Story
+          <textarea id="afStory" rows="3"></textarea>
+        </label>
+        <label>About Image
+          <input type="file" id="afImage" accept="image/*">
+        </label>
+        <div class="image-preview-row" id="afImagePreview"></div>
+        <label>Feature Points (one per line)
+          <textarea id="afFeatures" rows="4" placeholder="Premium cotton fabric&#10;Free size exchange&#10;Fast local delivery"></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Save About</button>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-shopinfo">
+      <h1>Shop Information</h1>
+      <form class="dash-form" id="shopInfoForm">
+        <label>Shop Name
+          <input type="text" id="siShopName">
+        </label>
+        <label>Address
+          <textarea id="siAddress" rows="2"></textarea>
+        </label>
+        <label>Phone
+          <input type="text" id="siPhone">
+        </label>
+        <label>WhatsApp Number (with country code, digits only, e.g. 919876543210)
+          <input type="text" id="siWhatsapp">
+        </label>
+        <label>Email
+          <input type="email" id="siEmail">
+        </label>
+        <label>Opening Hours
+          <input type="text" id="siHours">
+        </label>
+        <label>Google Maps Link
+          <input type="url" id="siMapLink">
+        </label>
+        <button type="submit" class="btn btn-primary">Save Shop Information</button>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-contact">
+      <h1>Contact Page</h1>
+      <form class="dash-form" id="contactForm">
+        <label>Contact Heading
+          <input type="text" id="cfHeading">
+        </label>
+        <label>Contact Description
+          <textarea id="cfDesc" rows="2"></textarea>
+        </label>
+        <p class="form-hint">Phone, WhatsApp, Email, Address, Hours and Map Link are shared with Shop Information — edit them there.</p>
+        <button type="submit" class="btn btn-primary">Save Contact</button>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-categories">
+      <h1>Categories</h1>
+      <form class="inline-form" id="addCategoryForm">
+        <input type="text" id="newCategoryName" placeholder="New category name" required>
+        <button type="submit" class="btn btn-primary">Add Category</button>
+      </form>
+      <div class="dash-list" id="categoryList"></div>
+    </div>
+
+    <div class="dash-panel" id="panel-social">
+      <h1>Social Links</h1>
+      <form class="dash-form" id="socialForm">
+        <label>Instagram URL
+          <input type="url" id="socInstagram" placeholder="https://instagram.com/yourshop">
+        </label>
+        <label>Facebook URL
+          <input type="url" id="socFacebook" placeholder="https://facebook.com/yourshop">
+        </label>
+        <label>YouTube URL
+          <input type="url" id="socYoutube" placeholder="https://youtube.com/@yourshop">
+        </label>
+        <label>WhatsApp URL / Number Link
+          <input type="text" id="socWhatsapp" placeholder="https://wa.me/919876543210">
+        </label>
+        <button type="submit" class="btn btn-primary">Save Social Links</button>
+      </form>
+    </div>
+
+    <div class="dash-panel" id="panel-settings">
+      <h1>Website Settings</h1>
+      <form class="dash-form" id="settingsForm">
+        <label>Website Name
+          <input type="text" id="stSiteName">
+        </label>
+        <label>Logo (shown next to name in header)
+          <input type="file" id="stLogo" accept="image/*">
+        </label>
+        <div class="image-preview-row" id="stLogoPreview"></div>
+        <button type="button" class="btn btn-outline" id="stRemoveLogo">Remove Logo</button>
+        <label>Favicon
+          <input type="file" id="stFavicon" accept="image/*">
+        </label>
+        <div class="image-preview-row" id="stFaviconPreview"></div>
+        <label>Footer Text
+          <input type="text" id="stFooterText">
+        </label>
+        <label>Copyright Text
+          <input type="text" id="stCopyright">
+        </label>
+        <label>Default Theme
+          <select id="stDefaultTheme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+        <hr>
+        <p class="form-hint">The owner password is stored as a hash in script.js, not as plain text — but since this site has no backend, this login is a light deterrent, not real security (anyone can read this file). See the comment above <code>OWNER_PASSWORD_HASH</code> in script.js for how to set a new password, and a note on real server-side security.</p>
+        <button type="submit" class="btn btn-primary">Save Settings</button>
+      </form>
+    </div>
+
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
